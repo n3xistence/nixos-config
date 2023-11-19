@@ -8,8 +8,6 @@ let
   user = "nex";
 in
 {
-  imports =
-    [(import ./hardware-configuration.nix )];
 #      // import Hyprland config here    
 
   boot = {
@@ -25,16 +23,6 @@ in
 
   networking = {
     hostName = "nixos"; # Define your hostname.
-    
-    wireless = {
-      enable = true;
-
-      networks = {
-        MiNi = {
-          psk = "0307250910112211";
-        }; 
-      };
-    };
   };
 
   time.timeZone = "Europe/Berlin";
@@ -83,16 +71,7 @@ in
     enable = true;
     mediaKeys.enable = true;
   };
-  hardware.bluetooth = {
-    enable = true;
-    hsphfpd.enable = true;
-    settings = {
-        General = {
-	      Enable = "Source,Sink,Media,Socket";
-      };
-    };
-  };
- 
+
   system.autoUpgrade = {
     enable = true;
     channel = "https://nixos.org/channels/nixos-unstable";
@@ -155,7 +134,6 @@ in
   hardware.pulseaudio.extraConfig = "unload-module module-suspend-on-idle";
 
   nix = {
-    package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
 
