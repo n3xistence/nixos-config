@@ -23,10 +23,11 @@
       lib = nixpkgs.lib;
     in 
     {
-      nixosConfigurations = {
+      nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
           inherit inputs user system home-manager;
         }
+      );
     };
 }
