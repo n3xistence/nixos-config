@@ -98,6 +98,7 @@ in
       neovim
       gcc
       discord
+      ranger
     ];
   };
 
