@@ -39,17 +39,6 @@ in
 
   time.timeZone = "Europe/Berlin";
 
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  #   useXkbConfig = true; # use xkbOptions in tty.
-  };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
   # Enable the Plasma 5 Desktop Environment.
   services = {
     xserver = {
@@ -60,22 +49,22 @@ in
         "amdgpu"
       ];
 
-      displayManager = {
-    	  lightdm = {
-    	    enable = true;
-    	  };
-    	  defaultSession = "xfce";
-      };	
-      desktopManager = {
-    	  xfce = {
-    	    enable = true;
-    	  };
-      };
-      windowManager = {
-        bspwm = {
-          enable = true;
-  	    };
-      };
+      # displayManager = {
+    	#   lightdm = {
+    	#     enable = true;
+    	#   };
+    	#   defaultSession = "xfce";
+      # };	
+      # desktopManager = {
+    	#   xfce = {
+    	#     enable = true;
+    	#   };
+      # };
+      # windowManager = {
+      #   bspwm = {
+      #     enable = true;
+  	  #   };
+      # };
     };
   };
 

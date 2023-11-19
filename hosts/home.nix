@@ -13,6 +13,7 @@
       htop
       unzip
       xclip
+      killall
     ];
   };
 

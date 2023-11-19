@@ -30,7 +30,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "us";
+    keyMap = "de";
   #   useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -40,6 +40,14 @@ in
 
   # Enable the Plasma 5 Desktop Environment.
   services = {
+    # pipewire = {
+    #   enable = true;
+    #   alsa.enable = true;
+    #   alsa.support32Bit = true;
+    #   pulse.enable = true;
+    #   jack.enable = true;
+    # };
+
     xserver = {
       enable = true;
       libinput.enable = true;
@@ -48,22 +56,29 @@ in
         "amdgpu"
       ];
 
-      displayManager = {
-    	  lightdm = {
-    	    enable = true;
-    	  };
-    	  defaultSession = "xfce";
-      };	
-      desktopManager = {
-    	  xfce = {
-    	    enable = true;
-    	  };
-      };
-      windowManager = {
-        bspwm = {
-          enable = true;
-  	    };
-      };
+      desktopManager.session.script = ''
+        ${pkgs.wlogout}/bin/logout
+      '';
+      
+      layout = "de";
+      xkbVariant = "qwerty";
+
+      # displayManager = {
+    	#   lightdm = {
+    	#     enable = true;
+    	#   };
+    	#   defaultSession = "xfce";
+      # };	
+      # desktopManager = {
+    	#   xfce = {
+    	#     enable = true;
+    	#   };
+      # };
+      # windowManager = {
+      #   bspwm = {
+      #     enable = true;
+  	  #   };
+      # };
     };
   };
 
@@ -102,12 +117,30 @@ in
     ];
   };
 
-  programs.zsh.enable = true;
-
+  programs = {
+    zsh.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+  };
   environment.systemPackages = with pkgs; [
     vim 
     wget
+    waybar
+    dunst
+    libnotify
+    swww
+    rofi-wayland
+    wlogout
   ];
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+   };
+  };
 
   system.stateVersion = "23.05"; # Did you read the comment?
 
@@ -124,16 +157,19 @@ in
       })
   ];
 
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
+  hardware = {
+    opengl.enable = true;
+
+    pulseaudio = {
+      enable = true;
+      support32Bit = true;
+      extraConfig = "unload-module module-suspend-on-idle";
+    };
   };
 
   users.extraUsers.${user}.extraGroups = [ "audio" ];
 
   nixpkgs.config.pulseaudio = true;
-  hardware.pulseaudio.extraConfig = "unload-module module-suspend-on-idle";
-
   nix = {
     extraOptions = "experimental-features = nix-command flakes";
   };
@@ -143,6 +179,9 @@ in
       TERMINAL  = "kitty";
       EDITOR = "nvim";
       VISUAL = "nvim";
+    };
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
     };
   };
 }
