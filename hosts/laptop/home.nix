@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 {
-  imports = 
-    [(import ../modules/shell)] ++
-    (import ../modules/editors);
+#   imports = 
+#     [(import ../../modules/shell)] ++
+#     (import ../../modules/editors);
 
   home = {
     username = "nex";

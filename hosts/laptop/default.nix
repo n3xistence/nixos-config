@@ -42,7 +42,7 @@ in
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "qwertz";
+    keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -105,7 +105,6 @@ in
   users.users.${user} = {
     isNormalUser = true;
     initialPassword = "toor";
-    shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       firefox
