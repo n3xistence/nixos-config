@@ -56,9 +56,9 @@ in
         "amdgpu"
       ];
 
-      desktopManager.session.script = ''
-        ${pkgs.wlogout}/bin/logout
-      '';
+      # desktopManager.session.script = ''
+      #   ${pkgs.wlogout}/bin/logout
+      # '';
       
       layout = "de";
       xkbVariant = "qwerty";
@@ -131,8 +131,8 @@ in
     dunst
     libnotify
     swww
-    rofi-wayland
     wlogout
+    wofi
   ];
 
   xdg = {
