@@ -21,75 +21,28 @@ in
     };
   };
 
-  networking = {
-    hostName = "nixos"; # Define your hostname.
-  };
-
   time.timeZone = "Europe/Berlin";
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "de";
-  #   useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
-  # Enable the Plasma 5 Desktop Environment.
   services = {
-    # pipewire = {
-    #   enable = true;
-    #   alsa.enable = true;
-    #   alsa.support32Bit = true;
-    #   pulse.enable = true;
-    #   jack.enable = true;
-    # };
-
     xserver = {
-      enable = true;
-      libinput.enable = true;
-      
-      videoDrivers = [
-        "amdgpu"
-      ];
-
       # desktopManager.session.script = ''
       #   ${pkgs.wlogout}/bin/logout
       # '';
       
       layout = "de";
-      xkbVariant = "qwerty";
-
-      # displayManager = {
-    	#   lightdm = {
-    	#     enable = true;
-    	#   };
-    	#   defaultSession = "xfce";
-      # };	
-      # desktopManager = {
-    	#   xfce = {
-    	#     enable = true;
-    	#   };
-      # };
-      # windowManager = {
-      #   bspwm = {
-      #     enable = true;
-  	  #   };
-      # };
+      xkbVariant = "qwerty";      
     };
   };
 
   sound = {
     enable = true;
     mediaKeys.enable = true;
-  };
-
-  system.autoUpgrade = {
-    enable = true;
-    channel = "https://nixos.org/channels/nixos-unstable";
   };
 
   fonts.fonts = with pkgs; [
@@ -114,6 +67,7 @@ in
       gcc
       discord
       ranger
+      obsidian
     ];
   };
 
@@ -124,6 +78,7 @@ in
       xwayland.enable = true;
     };
   };
+
   environment.systemPackages = with pkgs; [
     vim 
     wget
@@ -171,6 +126,7 @@ in
 
   nixpkgs.config.pulseaudio = true;
   nix = {
+    package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
 

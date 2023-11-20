@@ -13,8 +13,7 @@ alias paste='xclip -se c -o'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias sudoe='sudo -E -s'
-
-bindkey -e
+alias hy='Hyprland'
 
 function zle-line-init {
    marking=0

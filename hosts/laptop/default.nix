@@ -12,17 +12,6 @@ in
     [(import ./hardware-configuration.nix )];
 #      // import Hyprland config here    
 
-  boot = {
-    initrd.kernelModules = [ "amdgpu" ];
-
-    loader = {
-      systemd-boot = {
-        enable = true;
-      };
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
   networking = {
     hostName = "nixos"; # Define your hostname.
     
@@ -37,41 +26,16 @@ in
     };
   };
 
-  time.timeZone = "Europe/Berlin";
-
-  # Enable the Plasma 5 Desktop Environment.
   services = {
     xserver = {
-      enable = true;
       libinput.enable = true;
       
       videoDrivers = [
         "amdgpu"
       ];
-
-      # displayManager = {
-    	#   lightdm = {
-    	#     enable = true;
-    	#   };
-    	#   defaultSession = "xfce";
-      # };	
-      # desktopManager = {
-    	#   xfce = {
-    	#     enable = true;
-    	#   };
-      # };
-      # windowManager = {
-      #   bspwm = {
-      #     enable = true;
-  	  #   };
-      # };
     };
   };
 
-  sound = {
-    enable = true;
-    mediaKeys.enable = true;
-  };
   hardware.bluetooth = {
     enable = true;
     hsphfpd.enable = true;
@@ -110,13 +74,6 @@ in
     ];
   };
 
-  programs.zsh.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    vim 
-    wget
-  ];
-
   system.stateVersion = "23.05"; # Did you read the comment?
 
   nixpkgs.config.allowUnfree = true;
@@ -132,27 +89,6 @@ in
       })
   ];
 
-  hardware.pulseaudio = {
-    enable = true;
-    support32Bit = true;
-  };
-
   users.extraUsers.${user}.extraGroups = [ "audio" ];
-
-  nixpkgs.config.pulseaudio = true;
-  hardware.pulseaudio.extraConfig = "unload-module module-suspend-on-idle";
-
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
-
-  environment = {
-    variables = {
-      TERMINAL  = "kitty";
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-  };
 }
 
