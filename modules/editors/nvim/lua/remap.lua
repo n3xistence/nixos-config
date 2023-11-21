@@ -14,3 +14,5 @@ vim.keymap.set("n", "<leader>d", "\"_d")
 vim.keymap.set("v", "<leader>d", "\"_d")
 
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>ff", "<Cmd>lua vim.lsp.buf.format()<CR>")
+vim.keymap.set("n", "<leader><tab>", ":quit<CR>")
