@@ -15,14 +15,18 @@ in
   networking = {
     hostName = "nixos"; # Define your hostname.
     
+    networkmanager = {
+      enable = true;
+      unmanaged = ["wlp2so"];
+    };
     wireless = {
       enable = true;
 
-      networks = {
-        MiNi = {
-          psk = "0307250910112211";
-        }; 
-      };
+#      networks = {
+#        MiNi = {
+#          psk = "0307250910112211";
+#        }; 
+#      };
     };
   };
 

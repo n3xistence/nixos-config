@@ -14,9 +14,17 @@ in
     initrd.kernelModules = [ "amdgpu" ];
 
     loader = {
-      systemd-boot = {
+      # systemd-boot = {
+      #   enable = true;
+      # };
+      
+      grub = {
         enable = true;
+        devices = [ "nodev" ];
+        efiSupport = true;
+        useOSProber = true;
       };
+      
       efi.canTouchEfiVariables = true;
     };
   };
@@ -62,9 +70,13 @@ in
       zsh
       kitty
       starship
+      
       nodejs_20
-      neovim
+      typescript
+      bun
       gcc
+
+      neovim
       discord
       ranger
       obsidian
@@ -88,8 +100,13 @@ in
     swww
     wlogout
     wofi
-  ];
 
+    mesa
+    networkmanager
+    pavucontrol
+    xcape
+  ];
+  
   xdg = {
     portal = {
       enable = true;
