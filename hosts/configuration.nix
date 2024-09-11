@@ -8,6 +8,9 @@ let
   user = "nex";
 in
 {
+  imports = [
+    "/etc/nixos/hardware-configuration.nix"
+  ];
 #      // import Hyprland config here    
 
   boot = {
