@@ -9,7 +9,7 @@ let
 in
 {
   imports =
-    [(import ./hardware-configuration.nix )];
+    [];
 #      // import Hyprland config here    
 
   networking = {
@@ -42,7 +42,6 @@ in
 
   hardware.bluetooth = {
     enable = true;
-    hsphfpd.enable = true;
     settings = {
         General = {
 	      Enable = "Source,Sink,Media,Socket";
@@ -81,17 +80,6 @@ in
   system.stateVersion = "23.05"; # Did you read the comment?
 
   nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-        discord = super.discord.overrideAttrs (
-          _: { src = builtins.fetchTarball {
-              url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-              sha256 = "1xjk77g9lj5b78c1w3fj42by9b483pkbfb41yzxrg4p36mnd2hkn";
-            }; }
-        );
-      })
-  ];
 
   users.extraUsers.${user}.extraGroups = [ "audio" ];
 }

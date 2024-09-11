@@ -48,11 +48,6 @@ in
     };
   };
 
-  sound = {
-    enable = true;
-    mediaKeys.enable = true;
-  };
-
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
   ];
@@ -118,25 +113,8 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.overlays = [
-    (self: super: {
-        discord = super.discord.overrideAttrs (
-          _: { src = builtins.fetchTarball {
-              url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-              sha256 = "1xjk77g9lj5b78c1w3fj42by9b483pkbfb41yzxrg4p36mnd2hkn";
-            }; }
-        );
-      })
-  ];
-
   hardware = {
     opengl.enable = true;
-
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      extraConfig = "unload-module module-suspend-on-idle";
-    };
   };
 
   users.extraUsers.${user}.extraGroups = [ "audio" ];
